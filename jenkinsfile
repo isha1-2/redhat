@@ -1,0 +1,19 @@
+pipeline {
+	agent{
+	label 'slack'
+	}
+	stages {
+	    stage('Checkout') {
+	        steps {
+			checkout scm			       
+		      }}
+		stage('Build') {
+	           steps {
+			  sh '/home/isha/Documents/DevOps_software/apache-maven-3.9.6/mvn install'
+
+	                 }}
+		stage('Deployment'){
+		    steps {
+			sh 'cp target/redhat.war /home/isha/Documents/DevOps_software/apache-tomcat-9.0.88/webapps'
+			}}	
+}}
